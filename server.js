@@ -6,6 +6,7 @@ const mongoose = require('mongoose');
 const dotenv = require('dotenv');
 const routes = require("./routes.js")
 const VideoController = require('./controllers/VideoController.js')
+const CategoriaController = require('./controllers/CategoriaController.js')
 
 dotenv.config();
 

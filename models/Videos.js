@@ -17,10 +17,23 @@ url:{
     required: true,
 },
 
+ categoria:{
+    type: mongoose.Types.ObjectId,
+    ref:'Categoria',
+    required: false , 
+    
+}, 
+
+desc:{
+    type: String,
+    required: false,
+},
+
 likes :{
     type: Number,
-   
+    required: false,
 },
+
 
 });
 
