@@ -31,7 +31,7 @@ module.exports ={
         url,
         desc,
         likes,
-        categoria: Categoria.findById(categoria),
+        categoria,
         
 
      })
