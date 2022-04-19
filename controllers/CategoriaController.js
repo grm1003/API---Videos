@@ -3,6 +3,7 @@ const res = require('express/lib/response');
 const {v4 : uuid} = require('uuid');
 const Categoria = require('../models/Categorias.js');
 const { findById } = require('../models/Categorias.js');
+const mongoose = require('mongoose');
  
 module.exports ={
 // para visualizar os dados

@@ -1,5 +1,7 @@
 const mongoose = require('mongoose');
 const { required } = require('nodemon/lib/config');
+const Categoria = require('../models/Categorias.js');
+
 
 const videoSchema = new mongoose.Schema({
 _id :{
@@ -18,12 +20,12 @@ url:{
 },
 
  categoria:{
-    type: mongoose.Types.ObjectId,
-    ref:'Categoria',
-    required: false , 
+    /* type:  mongoose.Schema.Types.ObjectId,
+    ref: 'categoriaSchema', */
+    type: String,
+    required: true, 
     
-}, 
-
+},
 desc:{
     type: String,
     required: false,
