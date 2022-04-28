@@ -26,7 +26,9 @@ routes.post('/add', (req,res) => {
 })
 
 //Rotas de acesso para os vídeos
+
 routes.get('/videos', VideoController.index)
+routes.get ('/videos/busca', VideoController.filter)
 routes.post('/videos', VideoController.store)
 routes.put('/videos/:id', VideosMiddleware.validateId, VideoController.update); 
 routes.delete('/videos/:id', VideosMiddleware.validateId, VideoController.delete); 

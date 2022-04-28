@@ -7,13 +7,24 @@ const { findById } = require('../models/Videos.js');
 const Categorias = require('../models/Categorias.js');
 const Videos = require('../models/Videos.js');
 const { path } = require('express/lib/application');
-
+const { required } = require('nodemon/lib/config');
+const db = mongoose.connection;
  
 module.exports ={
 // para visualizar os dados
     async  index(request,response){
         try{
             const videos = await Video.find().populate('categoria');
+            return response.status(200).json({videos});
+        } catch (err) {
+            response.status(500).json({error: err.mesage});
+        }
+    },
+
+    async filter(request,response){
+        try{
+            const categoria = request.query.categoria 
+            const videos = await Video.find({categoria: categoria}).exec();
             return response.status(200).json({videos});
         } catch (err) {
             response.status(500).json({error: err.mesage});
@@ -38,8 +49,6 @@ module.exports ={
         return response.status(400).json({ error : 'Title or Url missing'})
      }
 
- 
-
      try {
         try {
              const categoriaId =  Categorias.findById(CategoriaId);
@@ -53,8 +62,8 @@ module.exports ={
             return res.status(400).json(err);
         }
         
-        const path = Categorias.find();
-        console.log(path)
+       
+    const path =  await Categorias.findOne({ _id: CategoriaId }).exec();
 
      const video = new Video({
         _id: uuid(),
@@ -62,11 +71,11 @@ module.exports ={
         url,
         desc,
         likes,
-        categoria: CategoriaId ,
+        categoria: path.title ,
      })
     
      
-
+     
      try{
          await video.save();
          return response.status(201).json( {message : 'Video add sucessfully'})
@@ -85,7 +94,7 @@ module.exports ={
         if(!categoria){
             CategoriaId = process.env.OpenId;
         }else {
-            CategoriaId = categoria ;
+            CategoriaId = categoria;
         }
         
          try{
@@ -98,12 +107,14 @@ module.exports ={
          if(!title && !url && likes && desc) {
             return response.status(400).json({error: "You must inform a new title or a new link, a new data!"});
         }
-   
+        
+        const path =  await Categorias.findOne({ _id: CategoriaId }).exec();
+
         if(title) response.video.title = title;
         if(url) response.video.url = url;
         if(desc) response.video.desc = desc;
         if(likes) response.video.likes = likes;
-        if(categoria) response.video.categoria = CategoriaId;
+        if(categoria) response.video.categoria = path.title;
 
         try {
             await response.video.save();
