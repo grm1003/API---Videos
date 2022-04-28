@@ -2,7 +2,7 @@
   "name": "primeira_api_node",
   "version": "1.0.0",
   "description": "primeira api node",
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
     "start": "nodemon server.js"
   },
