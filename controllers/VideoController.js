@@ -31,6 +31,16 @@ module.exports ={
         }
     },
 
+    async pages(request,response){
+        try{
+            const page = request.query.page
+            const videos = await Video.find().skip(page).limit(5);
+            return response.status(200).json({videos});
+        } catch (err) {
+            response.status(500).json({error: err.mesage});
+        }
+    },
+
 
 // para adicionar algum video post
     async store(request,response){
@@ -65,8 +75,17 @@ module.exports ={
        
     const path =  await Categorias.findOne({ _id: CategoriaId }).exec();
 
+    var id;
+          
+    if(request.body.title != "Teste"){
+        id  = uuid();
+        
+    }else{
+        id = 1;
+    }
+
      const video = new Video({
-        _id: uuid(),
+        _id: id,
         title,
         url,
         desc,
