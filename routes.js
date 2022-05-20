@@ -48,7 +48,7 @@ routes.get('/user',  UserMiddleware.checkToken, UserController.index)
 routes.post('/user', UserController.store)
 routes.post('/user/login', UserController.auth)
 routes.put('/user/:id',  UserMiddleware.checkToken, UserMiddleware.validateId ,UserController.update)
-routes.delete('/user/:userId',UserMiddleware.checkToken, UserMiddleware.validateId ,UserController.delete); 
+routes.delete('/user/:id',UserMiddleware.checkToken, UserMiddleware.validateId ,UserController.delete); 
 
 
 module.exports = routes; 
