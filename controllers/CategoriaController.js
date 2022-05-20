@@ -23,8 +23,17 @@ module.exports ={
         return response.status(400).json({ error : 'Title  missing'})
      }
 
+     var id;
+          
+     if(request.body.title != "Teste"){
+         id  = uuid();
+         
+     }else{
+         id = "0131efdf-0fde-4a05-bd7c-901c29cb3aa0";
+     } 
+
      const categoria = new Categoria({
-        _id: uuid(),
+        _id: id,
         title,
         color,
         

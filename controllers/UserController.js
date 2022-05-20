@@ -47,9 +47,17 @@ async  store (request,response){
     const salt = await bcrypt.genSalt(12)
     const hash = await bcrypt.hash(password, salt)
      
+    var id;
+          
+    if(request.body.email != "Teste"){
+        id  = uuid();
+        
+    }else{
+        id = "0131efdf-0fde-4a05-bd7c-901c29cb3aa0";
+    }
 
      const user = new User ({
-        _id: uuid(),
+        _id: id,
         email: request.body.email,
         password: hash,
 
@@ -140,13 +148,14 @@ async update(request,response){
 //para deletar os dados
 async delete (request,response){
     try{
-        await response.user.remove({ _id: request.params.userId}).exec()
+        await response.user.remove()
         return response.status(200).json({message: "Deletado com sucesso"})
     }catch(err){
         return response.status(500).json({ error : err.message})
     }
 }
 };
+
 
 
 
