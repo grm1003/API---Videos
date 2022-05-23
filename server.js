@@ -14,7 +14,7 @@ dotenv.config();
  const app = express();
  app.use(routes);
  app.use(express.json());
- const PORT = 36000;
+ const PORT = process.env.PORT ||36000;
 
 
 //conexão com banco de dados Cloud(AWS) - MongoDB
@@ -23,6 +23,6 @@ mongoose.connect(process.env.MONGO_URL).then(()=> console.log("Sucess DB_connect
 
 //process.env.PORT ||
 
-  app.listen(36000, () =>{
+  app.listen(PORT, () =>{
     console.log("Express started at http://localhost:36000")
 }) 
